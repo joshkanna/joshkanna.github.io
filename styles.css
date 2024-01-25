@@ -13,15 +13,16 @@ header {
   font-size: 30px;
 }
 
-
-
-.nav-link, .social-links {
+.nav-link,
+.social-links {
   color: white;
   margin: 10px 10px;
   font-size: 30px;
 }
 
-.navbar-brand:hover, .nav-link:hover, .social-links:hover {
+.navbar-brand:hover,
+.nav-link:hover,
+.social-links:hover {
   border-bottom: thin solid lightsalmon;
 }
 
@@ -46,7 +47,6 @@ p {
   margin: 20px;
 }
 
-/* Add more custom styles as needed */
 .bio {
   text-align: left;
 }
