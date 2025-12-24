@@ -11,6 +11,6 @@ I've been working on this MIDI synthesizer project that I'm really excited about
 
 I designed a custom [PCB](midi_PCB.png) in KiCad to integrate the ESP32, DAC, amplifier, and all the supporting components into a compact form factor. The firmware handles all the MIDI processing and software-defined waveform generation in C++.
 
-I ordered the custom PCB from JLCPCB and assembled it using the pick-and-place equipment at the Engineering Innovation Hub at Notre Dame, replacing the breadboard circuit with a more compact and integrated solution.
+I ordered the custom PCB from JLCPCB and assembled it using the pick-and-place equipment at the Engineering Innovation Hub at Notre Dame, replacing the breadboard circuit with a [more compact and integrated solution.](midi_synth_system.jpeg)
 
 Here's a video of the synth in action: [Midi Synth PCB](midi_synth_pcb.mp4)
