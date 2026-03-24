@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Projects | Joshua Kannappilly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e293b;
+            --accent: #3b82f6;
+            --bg: #fafafa;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .subheading {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .supporting-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Quick Highlights */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-summary {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: var(--accent);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .project-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-section h4 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .project-section p, .project-section ul {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-section li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        /* Now */
+        .now-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .now-category {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .now-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .now-category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .now-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            color: var(--accent);
+        }
+
+        .now-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .now-category h5 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .now-category hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .now-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .now-category li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .now-category li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .now-category li strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .last-updated {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-category p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* About */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .looking-for {
+            background: #f0f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            margin-top: 2rem;
+        }
+
+        .looking-for strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact */
+        /* Contact Page - Modern Minimal (Aryan-inspired) */
+        #contact {
+            padding: 10rem 2rem 6rem;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-simple {
+            max-width: 720px;
+            width: 100%;
+            background: var(--bg-secondary);
+            padding: 3rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-intro {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Links */
+        .contact-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-links li {
+            margin-bottom: 1.25rem;
+        }
+
+        /* Remove bullet, replace with cleaner style */
+        .contact-links li:before {
+            content: "";
+            display: none;
+        }
+
+        /* Link styling */
+        .contact-links a {
+            display: inline-block;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        /* Underline animation */
+        .contact-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.25s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .contact-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .contact-links i {
+            font-size: 1.1rem;
+            color: var(--accent);
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links a:hover i {
+            transform: scale(1.1);
+        }
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subheading {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Container for the buttons at the bottom of the card */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* The Apple-style Outline Button */
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Joshua Kannappilly</div>
+            <ul id="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/now">Now</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1: CubeSat BMS -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Battery Management System for IrishSat's CubeSat</h3>
+                        
+                        <p>
+                        The Battery Management System (BMS) is a custom-designed board built to manage and protect IrishSat's 2S2P lithium-ion battery pack. It monitors cell health in real time and communicates state-of-health data to the Power Hub Board over SMBus, ensuring the satellite's power subsystem stays informed and protected throughout operation.
+                        </p><br />
+
+                        
+                        <p>
+                        At the heart of the design is the Texas Instruments BQ40Z50-R2, a fuel gauge IC with built-in overcurrent and overvoltage protection and active cell balancing — all communicated over a 3.3V SMBus interface. The board interfaces with a network of peripherals including the Power Hub via a 6-pin I2C/power connector, four NTC thermistors for temperature sensing across the pack, a PTC thermistor for safety cutoff, and an additional NTC routed out to the Power Hub for external monitoring.
+                        </p><br />
+
+                        <p>
+                        The board is a 4-layer design with a dedicated ground plane on the bottom layer. High-current paths on the top layer use copper pours to reduce resistance and thermal stress, with the pack negative stitched to ground through a sense resistor and a net tie connecting 1N to GND. Layout decisions prioritized modularity, crosstalk minimization, and trace width scaled to each current path — from milliamp signal lines to the full pack discharge current.
+                        </p><br />
+
+                    </div>
+
+                    <div class="project-links">
+                        <a href="/assets/BMS_3D_Model.png" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-cpu"></i> PCB 3D Model
+                        </a>
+                        <a href="/assets/System Diagram.png" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-layers"></i> CubeSat System Architecture
+                        </a>
+                    </div>
+                    
+                    
+                </div>
+
+            
+                <!-- Project 2: MIDI Synthesizer -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>MIDI Synthesizer</h3>
+                        <p>
+                        This project involves the development of a polyphonic MIDI synthesizer utilizing an ESP32 microcontroller and a USB Host Shield to interface with digital pianos. The system is designed to perform real-time waveform generation (sine, square, triangle, sawtooth) with audio output delivered through dual 40mm speakers.
+                        </p><br />
+
+                        <p>
+                        To transition the design from a prototype to a finished product, a custom PCB was developed in KiCad. This board integrates the ESP32, a Digital-to-Analog Converter (DAC), an amplifier, and necessary peripheral components into a compact footprint. The system firmware is written in C++, managing both MIDI protocol processing and software-defined audio synthesis.
+                        </p><br />
+
+                        <p>
+                        The hardware was manufactured by JLCPCB and assembled using pick-and-place equipment at the Engineering Innovation Hub at the University of Notre Dame. This integrated approach replaces the initial breadboard circuit with a more robust and professional hardware solution.
+                        </p><br />
+                    </div>
+
+                    <div class="project-links">
+                        <a href="/assets/midi_synth_system.jpeg" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-cpu"></i> Full System
+                        </a>
+                        <a href="/assets/midi_PCB.png" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-layers"></i> PCB 3D Model
+                        </a>
+                        <a href="/assets/midi_synth_video.mp4" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-play-circle"></i> Video Demo
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- Project 3: Motion Control -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Automated Measurement Control for TECNA Characterization</h3>
+                        <p>
+                        Before this project, the lab had to manually sync a rotational motor with a lock-in amplifier, which was slow and prone to timing errors. I developed a unified software suite in Python using the QCoDeS framework to bridge the gap between the hardware and the data. I modernized the driver for a Newport SMC100 controller, implementing custom error-handling and translating raw motor counts into precise angular degrees.
+                        </p><br />
+
+                        <p>
+                        To validate the code, I ran polarization sweeps that successfully captured the expected cos²(θ) response of the nanoantennas, proving the system was accurate. We’re now ready to use this for live imaging as soon as our new focusing lenses are ready. I also expanded the project to include a 2D “snaking” raster scan using Thorlabs Kinesis motors, which allows us to create spatial thermal maps of the devices.
+                        </p><br />
+                    </div>
+                    <div class="project-links">
+                        <a href="/assets/Fall 2025 Research Report.pdf" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-cpu"></i> Research Report
+                        </a>
+                    </div>
+                    
+                
+                </div>
+
+                <!-- Project 4: Autonomous Bomb Detection Robot -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Autonomous Bomb Detection Robot</h3>
+                        <p>
+                        I worked with a 4-person team to build an autonomous robot using a BBC Micro:bit and Python that could navigate complex mazes, hunt for magnetic targets, and wirelessly communicate between two microcontrollers. It was a really fun challenge that combined hardware integration with programming!
+                        </p><br />
+
+                        <p>
+                        We packed the robot with multiple sensors - ultrasonic for obstacle detection, magnetometer for finding targets, line-following sensors, and motor encoders for precise movement. The coolest part was implementing an advanced maze navigation algorithm that could dynamically record its path and then autonomously navigate back to the start once it found all the targets.
+                        </p><br />
+
+                        <p>
+                        One of the bigger challenges was optimizing the embedded system performance since the Micro:bit has pretty limited resources. We focused on memory management and efficient task scheduling to handle all the sensor readings, motor control, and wireless communication smoothly. We also removed redundant code - like cutting out unnecessary wall checks on the exit path since we already knew the route. Getting everything to run efficiently on such a constrained system was definitely a learning experience!
+                        </p><br />
+                        
+                        <div class="project-links">
+                        <a href="https://docs.google.com/presentation/d/1A3qlRVDPjJGXVBZbrajlDvEv31_qV2AapJPDLz2MkKI/edit?slide=id.p#slide=id.p" class="btn btn-outline" target="_blank">
+                            <i class="bi bi-cpu"></i> Final Presentation
+                        </a>
+                    </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Joshua Kannappilly</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

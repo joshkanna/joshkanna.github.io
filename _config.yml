@@ -1,0 +1,13 @@
+name: Joshua Kannappilly
+title: EE Portfolio
+description: Electrical Engineering Student at Notre Dame
+
+# This makes your URLs look like /experience instead of /experience.html
+permalink: /:title/
+
+# Exclude these files from being built into the site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-cache
+  - node_modules
